@@ -1,0 +1,7 @@
+../Src/ESP_program.c:110:6:ESP8266_voidClearBuffer	0	static
+../Src/ESP_program.c:26:6:ESP8266_voidInit	8	static
+../Src/ESP_program.c:53:6:ESP8266_voidConnectToWiFi	16	static
+../Src/ESP_program.c:69:6:ESP8266_voidConnectToServerTcp	16	static
+../Src/ESP_program.c:84:4:ESP8266_u8ReceiveHttpReq	16	static
+../Src/ESP_program.c:147:6:ESP8266_voidReceiveRecord	24	static
+../Src/ESP_program.c:211:6:ESP8266_MUSART1CallBackFunction	8	static

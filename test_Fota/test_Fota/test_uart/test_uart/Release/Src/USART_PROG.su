@@ -1,0 +1,16 @@
+../Src/USART_PROG.c:16:6:MUSART1_vidInit	0	static
+../Src/USART_PROG.c:134:6:MUSART1_vidTransmitChar	0	static
+../Src/USART_PROG.c:146:6:MUSART1_vidTransmitString	8	static
+../Src/USART_PROG.c:162:6:MUSART1_u8ReceiveChar	0	static
+../Src/USART_PROG.c:183:6:MUSART1_vidNewLine	8	static
+../Src/USART_PROG.c:190:6:MUSART1_vidSetCallBack	0	static
+../Src/USART_PROG.c:197:6:MUSART1_vidClearFlag	0	static
+../Src/USART_PROG.c:203:6:USART1_IRQHandler	0	static
+../Src/USART_PROG.c:216:6:MUSART2_vidInit	0	static
+../Src/USART_PROG.c:335:6:MUSART2_vidTransmitChar	0	static
+../Src/USART_PROG.c:348:6:MUSART2_vidTransmitString	8	static
+../Src/USART_PROG.c:364:6:MUSART2_u8ReceiveChar	0	static
+../Src/USART_PROG.c:385:6:MUSART2_vidNewLine	8	static
+../Src/USART_PROG.c:392:6:MUSART2_vidSetCallBack	0	static
+../Src/USART_PROG.c:399:6:MUSART2_vidClearFlag	0	static
+../Src/USART_PROG.c:405:6:USART2_IRQHandler	0	static

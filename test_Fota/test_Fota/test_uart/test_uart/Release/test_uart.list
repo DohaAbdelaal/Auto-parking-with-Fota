@@ -1,0 +1,665 @@
+
+test_uart.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   00000130  08000000  08000000  00010000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         000005b0  08000130  08000130  00010130  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       000000a8  080006e0  080006e0  000106e0  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .ARM.extab    00000000  08000788  08000788  00010790  2**0
+                  CONTENTS
+  4 .ARM          00000000  08000788  08000788  00010790  2**0
+                  CONTENTS
+  5 .preinit_array 00000000  08000788  08000790  00010790  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .init_array   00000004  08000788  08000788  00010788  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .fini_array   00000004  0800078c  0800078c  0001078c  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .data         00000000  20000000  20000000  00010790  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  9 .bss          000000f4  20000000  08000790  00020000  2**2
+                  ALLOC
+ 10 ._user_heap_stack 00000604  200000f4  08000790  000200f4  2**0
+                  ALLOC
+ 11 .ARM.attributes 00000029  00000000  00000000  00010790  2**0
+                  CONTENTS, READONLY
+ 12 .comment      00000043  00000000  00000000  000107b9  2**0
+                  CONTENTS, READONLY
+ 13 .debug_frame  0000004c  00000000  00000000  000107fc  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+
+Disassembly of section .text:
+
+08000130 <__do_global_dtors_aux>:
+ 8000130:	b510      	push	{r4, lr}
+ 8000132:	4c05      	ldr	r4, [pc, #20]	; (8000148 <__do_global_dtors_aux+0x18>)
+ 8000134:	7823      	ldrb	r3, [r4, #0]
+ 8000136:	b933      	cbnz	r3, 8000146 <__do_global_dtors_aux+0x16>
+ 8000138:	4b04      	ldr	r3, [pc, #16]	; (800014c <__do_global_dtors_aux+0x1c>)
+ 800013a:	b113      	cbz	r3, 8000142 <__do_global_dtors_aux+0x12>
+ 800013c:	4804      	ldr	r0, [pc, #16]	; (8000150 <__do_global_dtors_aux+0x20>)
+ 800013e:	f3af 8000 	nop.w
+ 8000142:	2301      	movs	r3, #1
+ 8000144:	7023      	strb	r3, [r4, #0]
+ 8000146:	bd10      	pop	{r4, pc}
+ 8000148:	20000000 	.word	0x20000000
+ 800014c:	00000000 	.word	0x00000000
+ 8000150:	080006c8 	.word	0x080006c8
+
+08000154 <frame_dummy>:
+ 8000154:	b508      	push	{r3, lr}
+ 8000156:	4b03      	ldr	r3, [pc, #12]	; (8000164 <frame_dummy+0x10>)
+ 8000158:	b11b      	cbz	r3, 8000162 <frame_dummy+0xe>
+ 800015a:	4903      	ldr	r1, [pc, #12]	; (8000168 <frame_dummy+0x14>)
+ 800015c:	4803      	ldr	r0, [pc, #12]	; (800016c <frame_dummy+0x18>)
+ 800015e:	f3af 8000 	nop.w
+ 8000162:	bd08      	pop	{r3, pc}
+ 8000164:	00000000 	.word	0x00000000
+ 8000168:	20000004 	.word	0x20000004
+ 800016c:	080006c8 	.word	0x080006c8
+
+08000170 <ESP8266_voidClearBuffer>:
+ 8000170:	2100      	movs	r1, #0
+ 8000172:	4b03      	ldr	r3, [pc, #12]	; (8000180 <ESP8266_voidClearBuffer+0x10>)
+ 8000174:	2296      	movs	r2, #150	; 0x96
+ 8000176:	4803      	ldr	r0, [pc, #12]	; (8000184 <ESP8266_voidClearBuffer+0x14>)
+ 8000178:	7019      	strb	r1, [r3, #0]
+ 800017a:	f000 ba78 	b.w	800066e <memset>
+ 800017e:	bf00      	nop
+ 8000180:	200000e4 	.word	0x200000e4
+ 8000184:	2000001c 	.word	0x2000001c
+
+08000188 <ESP8266_voidInit>:
+ 8000188:	b508      	push	{r3, lr}
+ 800018a:	4808      	ldr	r0, [pc, #32]	; (80001ac <ESP8266_voidInit+0x24>)
+ 800018c:	f000 f98e 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000190:	4807      	ldr	r0, [pc, #28]	; (80001b0 <ESP8266_voidInit+0x28>)
+ 8000192:	f000 f905 	bl	80003a0 <MSTK_voidSetBusyWait>
+ 8000196:	4807      	ldr	r0, [pc, #28]	; (80001b4 <ESP8266_voidInit+0x2c>)
+ 8000198:	f000 f988 	bl	80004ac <MUSART1_vidTransmitString>
+ 800019c:	4806      	ldr	r0, [pc, #24]	; (80001b8 <ESP8266_voidInit+0x30>)
+ 800019e:	f000 f8ff 	bl	80003a0 <MSTK_voidSetBusyWait>
+ 80001a2:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+ 80001a6:	f7ff bfe3 	b.w	8000170 <ESP8266_voidClearBuffer>
+ 80001aa:	bf00      	nop
+ 80001ac:	080006e0 	.word	0x080006e0
+ 80001b0:	000f4240 	.word	0x000f4240
+ 80001b4:	080006e5 	.word	0x080006e5
+ 80001b8:	005b8d80 	.word	0x005b8d80
+
+080001bc <ESP8266_voidConnectToWiFi>:
+ 80001bc:	b538      	push	{r3, r4, r5, lr}
+ 80001be:	4605      	mov	r5, r0
+ 80001c0:	460c      	mov	r4, r1
+ 80001c2:	f7ff ffd5 	bl	8000170 <ESP8266_voidClearBuffer>
+ 80001c6:	480d      	ldr	r0, [pc, #52]	; (80001fc <ESP8266_voidConnectToWiFi+0x40>)
+ 80001c8:	f000 f970 	bl	80004ac <MUSART1_vidTransmitString>
+ 80001cc:	4628      	mov	r0, r5
+ 80001ce:	f000 f96d 	bl	80004ac <MUSART1_vidTransmitString>
+ 80001d2:	480b      	ldr	r0, [pc, #44]	; (8000200 <ESP8266_voidConnectToWiFi+0x44>)
+ 80001d4:	f000 f96a 	bl	80004ac <MUSART1_vidTransmitString>
+ 80001d8:	4620      	mov	r0, r4
+ 80001da:	4c0a      	ldr	r4, [pc, #40]	; (8000204 <ESP8266_voidConnectToWiFi+0x48>)
+ 80001dc:	f000 f966 	bl	80004ac <MUSART1_vidTransmitString>
+ 80001e0:	4809      	ldr	r0, [pc, #36]	; (8000208 <ESP8266_voidConnectToWiFi+0x4c>)
+ 80001e2:	f000 f963 	bl	80004ac <MUSART1_vidTransmitString>
+ 80001e6:	4620      	mov	r0, r4
+ 80001e8:	f000 f8da 	bl	80003a0 <MSTK_voidSetBusyWait>
+ 80001ec:	4620      	mov	r0, r4
+ 80001ee:	f000 f8d7 	bl	80003a0 <MSTK_voidSetBusyWait>
+ 80001f2:	4620      	mov	r0, r4
+ 80001f4:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
+ 80001f8:	f000 b8d2 	b.w	80003a0 <MSTK_voidSetBusyWait>
+ 80001fc:	080006ec 	.word	0x080006ec
+ 8000200:	0800070f 	.word	0x0800070f
+ 8000204:	005b8d80 	.word	0x005b8d80
+ 8000208:	080006fb 	.word	0x080006fb
+
+0800020c <ESP8266_voidConnectToServerTcp>:
+ 800020c:	b538      	push	{r3, r4, r5, lr}
+ 800020e:	4605      	mov	r5, r0
+ 8000210:	460c      	mov	r4, r1
+ 8000212:	f7ff ffad 	bl	8000170 <ESP8266_voidClearBuffer>
+ 8000216:	480a      	ldr	r0, [pc, #40]	; (8000240 <ESP8266_voidConnectToServerTcp+0x34>)
+ 8000218:	f000 f948 	bl	80004ac <MUSART1_vidTransmitString>
+ 800021c:	4628      	mov	r0, r5
+ 800021e:	f000 f945 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000222:	4808      	ldr	r0, [pc, #32]	; (8000244 <ESP8266_voidConnectToServerTcp+0x38>)
+ 8000224:	f000 f942 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000228:	4620      	mov	r0, r4
+ 800022a:	f000 f93f 	bl	80004ac <MUSART1_vidTransmitString>
+ 800022e:	4806      	ldr	r0, [pc, #24]	; (8000248 <ESP8266_voidConnectToServerTcp+0x3c>)
+ 8000230:	f000 f93c 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000234:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
+ 8000238:	4804      	ldr	r0, [pc, #16]	; (800024c <ESP8266_voidConnectToServerTcp+0x40>)
+ 800023a:	f000 b8b1 	b.w	80003a0 <MSTK_voidSetBusyWait>
+ 800023e:	bf00      	nop
+ 8000240:	080006ff 	.word	0x080006ff
+ 8000244:	08000713 	.word	0x08000713
+ 8000248:	080006fc 	.word	0x080006fc
+ 800024c:	003d0900 	.word	0x003d0900
+
+08000250 <ESP8266_u8ReceiveHttpReq>:
+ 8000250:	b570      	push	{r4, r5, r6, lr}
+ 8000252:	4616      	mov	r6, r2
+ 8000254:	4604      	mov	r4, r0
+ 8000256:	460d      	mov	r5, r1
+ 8000258:	f7ff ff8a 	bl	8000170 <ESP8266_voidClearBuffer>
+ 800025c:	4813      	ldr	r0, [pc, #76]	; (80002ac <ESP8266_u8ReceiveHttpReq+0x5c>)
+ 800025e:	f000 f925 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000262:	4630      	mov	r0, r6
+ 8000264:	4e12      	ldr	r6, [pc, #72]	; (80002b0 <ESP8266_u8ReceiveHttpReq+0x60>)
+ 8000266:	f000 f921 	bl	80004ac <MUSART1_vidTransmitString>
+ 800026a:	4630      	mov	r0, r6
+ 800026c:	f000 f91e 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000270:	4810      	ldr	r0, [pc, #64]	; (80002b4 <ESP8266_u8ReceiveHttpReq+0x64>)
+ 8000272:	f000 f895 	bl	80003a0 <MSTK_voidSetBusyWait>
+ 8000276:	f7ff ff7b 	bl	8000170 <ESP8266_voidClearBuffer>
+ 800027a:	480f      	ldr	r0, [pc, #60]	; (80002b8 <ESP8266_u8ReceiveHttpReq+0x68>)
+ 800027c:	f000 f916 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000280:	4620      	mov	r0, r4
+ 8000282:	f000 f913 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000286:	4628      	mov	r0, r5
+ 8000288:	f000 f910 	bl	80004ac <MUSART1_vidTransmitString>
+ 800028c:	4630      	mov	r0, r6
+ 800028e:	f000 f90d 	bl	80004ac <MUSART1_vidTransmitString>
+ 8000292:	480a      	ldr	r0, [pc, #40]	; (80002bc <ESP8266_u8ReceiveHttpReq+0x6c>)
+ 8000294:	f000 f884 	bl	80003a0 <MSTK_voidSetBusyWait>
+ 8000298:	4b09      	ldr	r3, [pc, #36]	; (80002c0 <ESP8266_u8ReceiveHttpReq+0x70>)
+ 800029a:	4620      	mov	r0, r4
+ 800029c:	f893 5025 	ldrb.w	r5, [r3, #37]	; 0x25
+ 80002a0:	4908      	ldr	r1, [pc, #32]	; (80002c4 <ESP8266_u8ReceiveHttpReq+0x74>)
+ 80002a2:	f7ff ffb3 	bl	800020c <ESP8266_voidConnectToServerTcp>
+ 80002a6:	4628      	mov	r0, r5
+ 80002a8:	bd70      	pop	{r4, r5, r6, pc}
+ 80002aa:	bf00      	nop
+ 80002ac:	08000716 	.word	0x08000716
+ 80002b0:	080006fc 	.word	0x080006fc
+ 80002b4:	007a1200 	.word	0x007a1200
+ 80002b8:	08000722 	.word	0x08000722
+ 80002bc:	04c4b400 	.word	0x04c4b400
+ 80002c0:	2000001c 	.word	0x2000001c
+ 80002c4:	0800072e 	.word	0x0800072e
+
+080002c8 <ESP8266_MUSART1CallBackFunction>:
+ 80002c8:	b508      	push	{r3, lr}
+ 80002ca:	f000 f8fb 	bl	80004c4 <MUSART1_u8ReceiveChar>
+ 80002ce:	b118      	cbz	r0, 80002d8 <ESP8266_MUSART1CallBackFunction+0x10>
+ 80002d0:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+ 80002d4:	f000 b932 	b.w	800053c <MUSART2_vidTransmitChar>
+ 80002d8:	bd08      	pop	{r3, pc}
+	...
+
+080002dc <MGPIO_VidSetPinDirection>:
+ 80002dc:	2801      	cmp	r0, #1
+ 80002de:	b510      	push	{r4, lr}
+ 80002e0:	d024      	beq.n	800032c <MGPIO_VidSetPinDirection+0x50>
+ 80002e2:	2802      	cmp	r0, #2
+ 80002e4:	d02a      	beq.n	800033c <MGPIO_VidSetPinDirection+0x60>
+ 80002e6:	b970      	cbnz	r0, 8000306 <MGPIO_VidSetPinDirection+0x2a>
+ 80002e8:	2907      	cmp	r1, #7
+ 80002ea:	d80d      	bhi.n	8000308 <MGPIO_VidSetPinDirection+0x2c>
+ 80002ec:	4b1e      	ldr	r3, [pc, #120]	; (8000368 <MGPIO_VidSetPinDirection+0x8c>)
+ 80002ee:	240f      	movs	r4, #15
+ 80002f0:	6818      	ldr	r0, [r3, #0]
+ 80002f2:	0089      	lsls	r1, r1, #2
+ 80002f4:	408c      	lsls	r4, r1
+ 80002f6:	ea20 0004 	bic.w	r0, r0, r4
+ 80002fa:	6018      	str	r0, [r3, #0]
+ 80002fc:	6818      	ldr	r0, [r3, #0]
+ 80002fe:	fa02 f101 	lsl.w	r1, r2, r1
+ 8000302:	4301      	orrs	r1, r0
+ 8000304:	6019      	str	r1, [r3, #0]
+ 8000306:	bd10      	pop	{r4, pc}
+ 8000308:	290f      	cmp	r1, #15
+ 800030a:	d8fc      	bhi.n	8000306 <MGPIO_VidSetPinDirection+0x2a>
+ 800030c:	4b16      	ldr	r3, [pc, #88]	; (8000368 <MGPIO_VidSetPinDirection+0x8c>)
+ 800030e:	240f      	movs	r4, #15
+ 8000310:	3908      	subs	r1, #8
+ 8000312:	b2c9      	uxtb	r1, r1
+ 8000314:	6858      	ldr	r0, [r3, #4]
+ 8000316:	0089      	lsls	r1, r1, #2
+ 8000318:	408c      	lsls	r4, r1
+ 800031a:	ea20 0004 	bic.w	r0, r0, r4
+ 800031e:	6058      	str	r0, [r3, #4]
+ 8000320:	6858      	ldr	r0, [r3, #4]
+ 8000322:	fa02 f101 	lsl.w	r1, r2, r1
+ 8000326:	4301      	orrs	r1, r0
+ 8000328:	6059      	str	r1, [r3, #4]
+ 800032a:	e7ec      	b.n	8000306 <MGPIO_VidSetPinDirection+0x2a>
+ 800032c:	2907      	cmp	r1, #7
+ 800032e:	d801      	bhi.n	8000334 <MGPIO_VidSetPinDirection+0x58>
+ 8000330:	4b0e      	ldr	r3, [pc, #56]	; (800036c <MGPIO_VidSetPinDirection+0x90>)
+ 8000332:	e7dc      	b.n	80002ee <MGPIO_VidSetPinDirection+0x12>
+ 8000334:	290f      	cmp	r1, #15
+ 8000336:	d8e6      	bhi.n	8000306 <MGPIO_VidSetPinDirection+0x2a>
+ 8000338:	4b0c      	ldr	r3, [pc, #48]	; (800036c <MGPIO_VidSetPinDirection+0x90>)
+ 800033a:	e7e8      	b.n	800030e <MGPIO_VidSetPinDirection+0x32>
+ 800033c:	2907      	cmp	r1, #7
+ 800033e:	d801      	bhi.n	8000344 <MGPIO_VidSetPinDirection+0x68>
+ 8000340:	4b0b      	ldr	r3, [pc, #44]	; (8000370 <MGPIO_VidSetPinDirection+0x94>)
+ 8000342:	e7d4      	b.n	80002ee <MGPIO_VidSetPinDirection+0x12>
+ 8000344:	290f      	cmp	r1, #15
+ 8000346:	d8de      	bhi.n	8000306 <MGPIO_VidSetPinDirection+0x2a>
+ 8000348:	240f      	movs	r4, #15
+ 800034a:	4b09      	ldr	r3, [pc, #36]	; (8000370 <MGPIO_VidSetPinDirection+0x94>)
+ 800034c:	3908      	subs	r1, #8
+ 800034e:	b2c9      	uxtb	r1, r1
+ 8000350:	6858      	ldr	r0, [r3, #4]
+ 8000352:	0089      	lsls	r1, r1, #2
+ 8000354:	408c      	lsls	r4, r1
+ 8000356:	ea20 0004 	bic.w	r0, r0, r4
+ 800035a:	6058      	str	r0, [r3, #4]
+ 800035c:	6858      	ldr	r0, [r3, #4]
+ 800035e:	408a      	lsls	r2, r1
+ 8000360:	4302      	orrs	r2, r0
+ 8000362:	605a      	str	r2, [r3, #4]
+ 8000364:	e7cf      	b.n	8000306 <MGPIO_VidSetPinDirection+0x2a>
+ 8000366:	bf00      	nop
+ 8000368:	40010800 	.word	0x40010800
+ 800036c:	40010c00 	.word	0x40010c00
+ 8000370:	40011000 	.word	0x40011000
+
+08000374 <MSTK_u8ReadFlag>:
+ 8000374:	f04f 23e0 	mov.w	r3, #3758153728	; 0xe000e000
+ 8000378:	6918      	ldr	r0, [r3, #16]
+ 800037a:	f3c0 4000 	ubfx	r0, r0, #16, #1
+ 800037e:	4770      	bx	lr
+
+08000380 <SysTick_Handler>:
+ 8000380:	2300      	movs	r3, #0
+ 8000382:	b507      	push	{r0, r1, r2, lr}
+ 8000384:	f88d 3007 	strb.w	r3, [sp, #7]
+ 8000388:	4b04      	ldr	r3, [pc, #16]	; (800039c <SysTick_Handler+0x1c>)
+ 800038a:	681b      	ldr	r3, [r3, #0]
+ 800038c:	4798      	blx	r3
+ 800038e:	f7ff fff1 	bl	8000374 <MSTK_u8ReadFlag>
+ 8000392:	f88d 0007 	strb.w	r0, [sp, #7]
+ 8000396:	b003      	add	sp, #12
+ 8000398:	f85d fb04 	ldr.w	pc, [sp], #4
+ 800039c:	200000e8 	.word	0x200000e8
+
+080003a0 <MSTK_voidSetBusyWait>:
+ 80003a0:	f04f 23e0 	mov.w	r3, #3758153728	; 0xe000e000
+ 80003a4:	6158      	str	r0, [r3, #20]
+ 80003a6:	691a      	ldr	r2, [r3, #16]
+ 80003a8:	f042 0201 	orr.w	r2, r2, #1
+ 80003ac:	611a      	str	r2, [r3, #16]
+ 80003ae:	691a      	ldr	r2, [r3, #16]
+ 80003b0:	03d2      	lsls	r2, r2, #15
+ 80003b2:	d5fc      	bpl.n	80003ae <MSTK_voidSetBusyWait+0xe>
+ 80003b4:	691a      	ldr	r2, [r3, #16]
+ 80003b6:	f022 0201 	bic.w	r2, r2, #1
+ 80003ba:	611a      	str	r2, [r3, #16]
+ 80003bc:	2200      	movs	r2, #0
+ 80003be:	615a      	str	r2, [r3, #20]
+ 80003c0:	619a      	str	r2, [r3, #24]
+ 80003c2:	4770      	bx	lr
+
+080003c4 <MNVIC_VidEnablePeripheral>:
+ 80003c4:	2301      	movs	r3, #1
+ 80003c6:	0941      	lsrs	r1, r0, #5
+ 80003c8:	4a03      	ldr	r2, [pc, #12]	; (80003d8 <MNVIC_VidEnablePeripheral+0x14>)
+ 80003ca:	f000 001f 	and.w	r0, r0, #31
+ 80003ce:	4083      	lsls	r3, r0
+ 80003d0:	f842 3021 	str.w	r3, [r2, r1, lsl #2]
+ 80003d4:	4770      	bx	lr
+ 80003d6:	bf00      	nop
+ 80003d8:	e000e100 	.word	0xe000e100
+
+080003dc <MRCC_VidInit>:
+ 80003dc:	4b0b      	ldr	r3, [pc, #44]	; (800040c <MRCC_VidInit+0x30>)
+ 80003de:	685a      	ldr	r2, [r3, #4]
+ 80003e0:	f042 0201 	orr.w	r2, r2, #1
+ 80003e4:	605a      	str	r2, [r3, #4]
+ 80003e6:	685a      	ldr	r2, [r3, #4]
+ 80003e8:	f022 0202 	bic.w	r2, r2, #2
+ 80003ec:	605a      	str	r2, [r3, #4]
+ 80003ee:	681a      	ldr	r2, [r3, #0]
+ 80003f0:	f442 3280 	orr.w	r2, r2, #65536	; 0x10000
+ 80003f4:	601a      	str	r2, [r3, #0]
+ 80003f6:	4a06      	ldr	r2, [pc, #24]	; (8000410 <MRCC_VidInit+0x34>)
+ 80003f8:	6819      	ldr	r1, [r3, #0]
+ 80003fa:	0389      	lsls	r1, r1, #14
+ 80003fc:	d401      	bmi.n	8000402 <MRCC_VidInit+0x26>
+ 80003fe:	3a01      	subs	r2, #1
+ 8000400:	d1fa      	bne.n	80003f8 <MRCC_VidInit+0x1c>
+ 8000402:	681a      	ldr	r2, [r3, #0]
+ 8000404:	f422 2200 	bic.w	r2, r2, #524288	; 0x80000
+ 8000408:	601a      	str	r2, [r3, #0]
+ 800040a:	4770      	bx	lr
+ 800040c:	40021000 	.word	0x40021000
+ 8000410:	000186a1 	.word	0x000186a1
+
+08000414 <MRCC_VidEnablePeripheralClock>:
+ 8000414:	2801      	cmp	r0, #1
+ 8000416:	d009      	beq.n	800042c <MRCC_VidEnablePeripheralClock+0x18>
+ 8000418:	2802      	cmp	r0, #2
+ 800041a:	d00d      	beq.n	8000438 <MRCC_VidEnablePeripheralClock+0x24>
+ 800041c:	b990      	cbnz	r0, 8000444 <MRCC_VidEnablePeripheralClock+0x30>
+ 800041e:	2301      	movs	r3, #1
+ 8000420:	4a09      	ldr	r2, [pc, #36]	; (8000448 <MRCC_VidEnablePeripheralClock+0x34>)
+ 8000422:	408b      	lsls	r3, r1
+ 8000424:	6950      	ldr	r0, [r2, #20]
+ 8000426:	4303      	orrs	r3, r0
+ 8000428:	6153      	str	r3, [r2, #20]
+ 800042a:	4770      	bx	lr
+ 800042c:	4b06      	ldr	r3, [pc, #24]	; (8000448 <MRCC_VidEnablePeripheralClock+0x34>)
+ 800042e:	4088      	lsls	r0, r1
+ 8000430:	69da      	ldr	r2, [r3, #28]
+ 8000432:	4310      	orrs	r0, r2
+ 8000434:	61d8      	str	r0, [r3, #28]
+ 8000436:	4770      	bx	lr
+ 8000438:	2301      	movs	r3, #1
+ 800043a:	4a03      	ldr	r2, [pc, #12]	; (8000448 <MRCC_VidEnablePeripheralClock+0x34>)
+ 800043c:	408b      	lsls	r3, r1
+ 800043e:	6990      	ldr	r0, [r2, #24]
+ 8000440:	4303      	orrs	r3, r0
+ 8000442:	6193      	str	r3, [r2, #24]
+ 8000444:	4770      	bx	lr
+ 8000446:	bf00      	nop
+ 8000448:	40021000 	.word	0x40021000
+
+0800044c <MUSART1_vidInit>:
+ 800044c:	2200      	movs	r2, #0
+ 800044e:	4b12      	ldr	r3, [pc, #72]	; (8000498 <MUSART1_vidInit+0x4c>)
+ 8000450:	601a      	str	r2, [r3, #0]
+ 8000452:	2245      	movs	r2, #69	; 0x45
+ 8000454:	609a      	str	r2, [r3, #8]
+ 8000456:	68da      	ldr	r2, [r3, #12]
+ 8000458:	f422 5280 	bic.w	r2, r2, #4096	; 0x1000
+ 800045c:	60da      	str	r2, [r3, #12]
+ 800045e:	68da      	ldr	r2, [r3, #12]
+ 8000460:	f422 6280 	bic.w	r2, r2, #1024	; 0x400
+ 8000464:	60da      	str	r2, [r3, #12]
+ 8000466:	68da      	ldr	r2, [r3, #12]
+ 8000468:	f042 0208 	orr.w	r2, r2, #8
+ 800046c:	60da      	str	r2, [r3, #12]
+ 800046e:	68da      	ldr	r2, [r3, #12]
+ 8000470:	f042 0204 	orr.w	r2, r2, #4
+ 8000474:	60da      	str	r2, [r3, #12]
+ 8000476:	691a      	ldr	r2, [r3, #16]
+ 8000478:	f422 5280 	bic.w	r2, r2, #4096	; 0x1000
+ 800047c:	611a      	str	r2, [r3, #16]
+ 800047e:	691a      	ldr	r2, [r3, #16]
+ 8000480:	f422 5200 	bic.w	r2, r2, #8192	; 0x2000
+ 8000484:	611a      	str	r2, [r3, #16]
+ 8000486:	68da      	ldr	r2, [r3, #12]
+ 8000488:	f042 0220 	orr.w	r2, r2, #32
+ 800048c:	60da      	str	r2, [r3, #12]
+ 800048e:	68da      	ldr	r2, [r3, #12]
+ 8000490:	f442 5200 	orr.w	r2, r2, #8192	; 0x2000
+ 8000494:	60da      	str	r2, [r3, #12]
+ 8000496:	4770      	bx	lr
+ 8000498:	40013800 	.word	0x40013800
+
+0800049c <MUSART1_vidTransmitChar>:
+ 800049c:	4b02      	ldr	r3, [pc, #8]	; (80004a8 <MUSART1_vidTransmitChar+0xc>)
+ 800049e:	6058      	str	r0, [r3, #4]
+ 80004a0:	681a      	ldr	r2, [r3, #0]
+ 80004a2:	0652      	lsls	r2, r2, #25
+ 80004a4:	d5fc      	bpl.n	80004a0 <MUSART1_vidTransmitChar+0x4>
+ 80004a6:	4770      	bx	lr
+ 80004a8:	40013800 	.word	0x40013800
+
+080004ac <MUSART1_vidTransmitString>:
+ 80004ac:	b510      	push	{r4, lr}
+ 80004ae:	2100      	movs	r1, #0
+ 80004b0:	4604      	mov	r4, r0
+ 80004b2:	b2cb      	uxtb	r3, r1
+ 80004b4:	5ce0      	ldrb	r0, [r4, r3]
+ 80004b6:	3101      	adds	r1, #1
+ 80004b8:	b900      	cbnz	r0, 80004bc <MUSART1_vidTransmitString+0x10>
+ 80004ba:	bd10      	pop	{r4, pc}
+ 80004bc:	f7ff ffee 	bl	800049c <MUSART1_vidTransmitChar>
+ 80004c0:	e7f7      	b.n	80004b2 <MUSART1_vidTransmitString+0x6>
+	...
+
+080004c4 <MUSART1_u8ReceiveChar>:
+ 80004c4:	4b01      	ldr	r3, [pc, #4]	; (80004cc <MUSART1_u8ReceiveChar+0x8>)
+ 80004c6:	6858      	ldr	r0, [r3, #4]
+ 80004c8:	b2c0      	uxtb	r0, r0
+ 80004ca:	4770      	bx	lr
+ 80004cc:	40013800 	.word	0x40013800
+
+080004d0 <MUSART1_vidSetCallBack>:
+ 80004d0:	4b01      	ldr	r3, [pc, #4]	; (80004d8 <MUSART1_vidSetCallBack+0x8>)
+ 80004d2:	6018      	str	r0, [r3, #0]
+ 80004d4:	4770      	bx	lr
+ 80004d6:	bf00      	nop
+ 80004d8:	200000ec 	.word	0x200000ec
+
+080004dc <USART1_IRQHandler>:
+ 80004dc:	4b01      	ldr	r3, [pc, #4]	; (80004e4 <USART1_IRQHandler+0x8>)
+ 80004de:	681b      	ldr	r3, [r3, #0]
+ 80004e0:	4718      	bx	r3
+ 80004e2:	bf00      	nop
+ 80004e4:	200000ec 	.word	0x200000ec
+
+080004e8 <MUSART2_vidInit>:
+ 80004e8:	2200      	movs	r2, #0
+ 80004ea:	2145      	movs	r1, #69	; 0x45
+ 80004ec:	4b12      	ldr	r3, [pc, #72]	; (8000538 <MUSART2_vidInit+0x50>)
+ 80004ee:	601a      	str	r2, [r3, #0]
+ 80004f0:	6099      	str	r1, [r3, #8]
+ 80004f2:	68d9      	ldr	r1, [r3, #12]
+ 80004f4:	f421 5180 	bic.w	r1, r1, #4096	; 0x1000
+ 80004f8:	60d9      	str	r1, [r3, #12]
+ 80004fa:	68d9      	ldr	r1, [r3, #12]
+ 80004fc:	f421 6180 	bic.w	r1, r1, #1024	; 0x400
+ 8000500:	60d9      	str	r1, [r3, #12]
+ 8000502:	68d9      	ldr	r1, [r3, #12]
+ 8000504:	f041 0108 	orr.w	r1, r1, #8
+ 8000508:	60d9      	str	r1, [r3, #12]
+ 800050a:	68d9      	ldr	r1, [r3, #12]
+ 800050c:	f041 0104 	orr.w	r1, r1, #4
+ 8000510:	60d9      	str	r1, [r3, #12]
+ 8000512:	6919      	ldr	r1, [r3, #16]
+ 8000514:	f421 5180 	bic.w	r1, r1, #4096	; 0x1000
+ 8000518:	6119      	str	r1, [r3, #16]
+ 800051a:	6919      	ldr	r1, [r3, #16]
+ 800051c:	f421 5100 	bic.w	r1, r1, #8192	; 0x2000
+ 8000520:	6119      	str	r1, [r3, #16]
+ 8000522:	68d9      	ldr	r1, [r3, #12]
+ 8000524:	f041 0120 	orr.w	r1, r1, #32
+ 8000528:	60d9      	str	r1, [r3, #12]
+ 800052a:	68d9      	ldr	r1, [r3, #12]
+ 800052c:	f441 5100 	orr.w	r1, r1, #8192	; 0x2000
+ 8000530:	60d9      	str	r1, [r3, #12]
+ 8000532:	601a      	str	r2, [r3, #0]
+ 8000534:	605a      	str	r2, [r3, #4]
+ 8000536:	4770      	bx	lr
+ 8000538:	40004400 	.word	0x40004400
+
+0800053c <MUSART2_vidTransmitChar>:
+ 800053c:	4b02      	ldr	r3, [pc, #8]	; (8000548 <MUSART2_vidTransmitChar+0xc>)
+ 800053e:	6058      	str	r0, [r3, #4]
+ 8000540:	681a      	ldr	r2, [r3, #0]
+ 8000542:	0652      	lsls	r2, r2, #25
+ 8000544:	d5fc      	bpl.n	8000540 <MUSART2_vidTransmitChar+0x4>
+ 8000546:	4770      	bx	lr
+ 8000548:	40004400 	.word	0x40004400
+
+0800054c <USART2_IRQHandler>:
+ 800054c:	4b01      	ldr	r3, [pc, #4]	; (8000554 <USART2_IRQHandler+0x8>)
+ 800054e:	681b      	ldr	r3, [r3, #0]
+ 8000550:	4718      	bx	r3
+ 8000552:	bf00      	nop
+ 8000554:	200000f0 	.word	0x200000f0
+
+08000558 <main>:
+ 8000558:	b508      	push	{r3, lr}
+ 800055a:	f7ff ff3f 	bl	80003dc <MRCC_VidInit>
+ 800055e:	2102      	movs	r1, #2
+ 8000560:	4608      	mov	r0, r1
+ 8000562:	f7ff ff57 	bl	8000414 <MRCC_VidEnablePeripheralClock>
+ 8000566:	2103      	movs	r1, #3
+ 8000568:	2002      	movs	r0, #2
+ 800056a:	f7ff ff53 	bl	8000414 <MRCC_VidEnablePeripheralClock>
+ 800056e:	2104      	movs	r1, #4
+ 8000570:	2002      	movs	r0, #2
+ 8000572:	f7ff ff4f 	bl	8000414 <MRCC_VidEnablePeripheralClock>
+ 8000576:	210e      	movs	r1, #14
+ 8000578:	2002      	movs	r0, #2
+ 800057a:	f7ff ff4b 	bl	8000414 <MRCC_VidEnablePeripheralClock>
+ 800057e:	2111      	movs	r1, #17
+ 8000580:	2001      	movs	r0, #1
+ 8000582:	f7ff ff47 	bl	8000414 <MRCC_VidEnablePeripheralClock>
+ 8000586:	220a      	movs	r2, #10
+ 8000588:	2109      	movs	r1, #9
+ 800058a:	2000      	movs	r0, #0
+ 800058c:	f7ff fea6 	bl	80002dc <MGPIO_VidSetPinDirection>
+ 8000590:	2204      	movs	r2, #4
+ 8000592:	210a      	movs	r1, #10
+ 8000594:	2000      	movs	r0, #0
+ 8000596:	f7ff fea1 	bl	80002dc <MGPIO_VidSetPinDirection>
+ 800059a:	220a      	movs	r2, #10
+ 800059c:	2102      	movs	r1, #2
+ 800059e:	2000      	movs	r0, #0
+ 80005a0:	f7ff fe9c 	bl	80002dc <MGPIO_VidSetPinDirection>
+ 80005a4:	2204      	movs	r2, #4
+ 80005a6:	2103      	movs	r1, #3
+ 80005a8:	2000      	movs	r0, #0
+ 80005aa:	f7ff fe97 	bl	80002dc <MGPIO_VidSetPinDirection>
+ 80005ae:	f7ff ff4d 	bl	800044c <MUSART1_vidInit>
+ 80005b2:	4812      	ldr	r0, [pc, #72]	; (80005fc <main+0xa4>)
+ 80005b4:	f7ff ff8c 	bl	80004d0 <MUSART1_vidSetCallBack>
+ 80005b8:	f7ff ff96 	bl	80004e8 <MUSART2_vidInit>
+ 80005bc:	204b      	movs	r0, #75	; 0x4b
+ 80005be:	f7ff ffbd 	bl	800053c <MUSART2_vidTransmitChar>
+ 80005c2:	206a      	movs	r0, #106	; 0x6a
+ 80005c4:	f7ff ffba 	bl	800053c <MUSART2_vidTransmitChar>
+ 80005c8:	206d      	movs	r0, #109	; 0x6d
+ 80005ca:	f7ff ffb7 	bl	800053c <MUSART2_vidTransmitChar>
+ 80005ce:	200a      	movs	r0, #10
+ 80005d0:	f7ff ffb4 	bl	800053c <MUSART2_vidTransmitChar>
+ 80005d4:	f7ff fdd8 	bl	8000188 <ESP8266_voidInit>
+ 80005d8:	4909      	ldr	r1, [pc, #36]	; (8000600 <main+0xa8>)
+ 80005da:	480a      	ldr	r0, [pc, #40]	; (8000604 <main+0xac>)
+ 80005dc:	f7ff fdee 	bl	80001bc <ESP8266_voidConnectToWiFi>
+ 80005e0:	4909      	ldr	r1, [pc, #36]	; (8000608 <main+0xb0>)
+ 80005e2:	480a      	ldr	r0, [pc, #40]	; (800060c <main+0xb4>)
+ 80005e4:	f7ff fe12 	bl	800020c <ESP8266_voidConnectToServerTcp>
+ 80005e8:	4a09      	ldr	r2, [pc, #36]	; (8000610 <main+0xb8>)
+ 80005ea:	490a      	ldr	r1, [pc, #40]	; (8000614 <main+0xbc>)
+ 80005ec:	480a      	ldr	r0, [pc, #40]	; (8000618 <main+0xc0>)
+ 80005ee:	f7ff fe2f 	bl	8000250 <ESP8266_u8ReceiveHttpReq>
+ 80005f2:	2025      	movs	r0, #37	; 0x25
+ 80005f4:	f7ff fee6 	bl	80003c4 <MNVIC_VidEnablePeripheral>
+ 80005f8:	e7fe      	b.n	80005f8 <main+0xa0>
+ 80005fa:	bf00      	nop
+ 80005fc:	080002c9 	.word	0x080002c9
+ 8000600:	08000731 	.word	0x08000731
+ 8000604:	0800073b 	.word	0x0800073b
+ 8000608:	0800072e 	.word	0x0800072e
+ 800060c:	0800074b 	.word	0x0800074b
+ 8000610:	08000759 	.word	0x08000759
+ 8000614:	0800075c 	.word	0x0800075c
+ 8000618:	08000770 	.word	0x08000770
+
+0800061c <Reset_Handler>:
+ 800061c:	480d      	ldr	r0, [pc, #52]	; (8000654 <LoopForever+0x2>)
+ 800061e:	4685      	mov	sp, r0
+ 8000620:	f3af 8000 	nop.w
+ 8000624:	480c      	ldr	r0, [pc, #48]	; (8000658 <LoopForever+0x6>)
+ 8000626:	490d      	ldr	r1, [pc, #52]	; (800065c <LoopForever+0xa>)
+ 8000628:	4a0d      	ldr	r2, [pc, #52]	; (8000660 <LoopForever+0xe>)
+ 800062a:	2300      	movs	r3, #0
+ 800062c:	e002      	b.n	8000634 <LoopCopyDataInit>
+
+0800062e <CopyDataInit>:
+ 800062e:	58d4      	ldr	r4, [r2, r3]
+ 8000630:	50c4      	str	r4, [r0, r3]
+ 8000632:	3304      	adds	r3, #4
+
+08000634 <LoopCopyDataInit>:
+ 8000634:	18c4      	adds	r4, r0, r3
+ 8000636:	428c      	cmp	r4, r1
+ 8000638:	d3f9      	bcc.n	800062e <CopyDataInit>
+ 800063a:	4a0a      	ldr	r2, [pc, #40]	; (8000664 <LoopForever+0x12>)
+ 800063c:	4c0a      	ldr	r4, [pc, #40]	; (8000668 <LoopForever+0x16>)
+ 800063e:	2300      	movs	r3, #0
+ 8000640:	e001      	b.n	8000646 <LoopFillZerobss>
+
+08000642 <FillZerobss>:
+ 8000642:	6013      	str	r3, [r2, #0]
+ 8000644:	3204      	adds	r2, #4
+
+08000646 <LoopFillZerobss>:
+ 8000646:	42a2      	cmp	r2, r4
+ 8000648:	d3fb      	bcc.n	8000642 <FillZerobss>
+ 800064a:	f000 f819 	bl	8000680 <__libc_init_array>
+ 800064e:	f7ff ff83 	bl	8000558 <main>
+
+08000652 <LoopForever>:
+ 8000652:	e7fe      	b.n	8000652 <LoopForever>
+ 8000654:	20005000 	.word	0x20005000
+ 8000658:	20000000 	.word	0x20000000
+ 800065c:	20000000 	.word	0x20000000
+ 8000660:	08000790 	.word	0x08000790
+ 8000664:	20000000 	.word	0x20000000
+ 8000668:	200000f4 	.word	0x200000f4
+
+0800066c <ADC1_2_IRQHandler>:
+ 800066c:	e7fe      	b.n	800066c <ADC1_2_IRQHandler>
+
+0800066e <memset>:
+ 800066e:	4603      	mov	r3, r0
+ 8000670:	4402      	add	r2, r0
+ 8000672:	4293      	cmp	r3, r2
+ 8000674:	d100      	bne.n	8000678 <memset+0xa>
+ 8000676:	4770      	bx	lr
+ 8000678:	f803 1b01 	strb.w	r1, [r3], #1
+ 800067c:	e7f9      	b.n	8000672 <memset+0x4>
+	...
+
+08000680 <__libc_init_array>:
+ 8000680:	b570      	push	{r4, r5, r6, lr}
+ 8000682:	2600      	movs	r6, #0
+ 8000684:	4d0c      	ldr	r5, [pc, #48]	; (80006b8 <__libc_init_array+0x38>)
+ 8000686:	4c0d      	ldr	r4, [pc, #52]	; (80006bc <__libc_init_array+0x3c>)
+ 8000688:	1b64      	subs	r4, r4, r5
+ 800068a:	10a4      	asrs	r4, r4, #2
+ 800068c:	42a6      	cmp	r6, r4
+ 800068e:	d109      	bne.n	80006a4 <__libc_init_array+0x24>
+ 8000690:	f000 f81a 	bl	80006c8 <_init>
+ 8000694:	2600      	movs	r6, #0
+ 8000696:	4d0a      	ldr	r5, [pc, #40]	; (80006c0 <__libc_init_array+0x40>)
+ 8000698:	4c0a      	ldr	r4, [pc, #40]	; (80006c4 <__libc_init_array+0x44>)
+ 800069a:	1b64      	subs	r4, r4, r5
+ 800069c:	10a4      	asrs	r4, r4, #2
+ 800069e:	42a6      	cmp	r6, r4
+ 80006a0:	d105      	bne.n	80006ae <__libc_init_array+0x2e>
+ 80006a2:	bd70      	pop	{r4, r5, r6, pc}
+ 80006a4:	f855 3b04 	ldr.w	r3, [r5], #4
+ 80006a8:	4798      	blx	r3
+ 80006aa:	3601      	adds	r6, #1
+ 80006ac:	e7ee      	b.n	800068c <__libc_init_array+0xc>
+ 80006ae:	f855 3b04 	ldr.w	r3, [r5], #4
+ 80006b2:	4798      	blx	r3
+ 80006b4:	3601      	adds	r6, #1
+ 80006b6:	e7f2      	b.n	800069e <__libc_init_array+0x1e>
+ 80006b8:	08000788 	.word	0x08000788
+ 80006bc:	08000788 	.word	0x08000788
+ 80006c0:	08000788 	.word	0x08000788
+ 80006c4:	0800078c 	.word	0x0800078c
+
+080006c8 <_init>:
+ 80006c8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80006ca:	bf00      	nop
+ 80006cc:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80006ce:	bc08      	pop	{r3}
+ 80006d0:	469e      	mov	lr, r3
+ 80006d2:	4770      	bx	lr
+
+080006d4 <_fini>:
+ 80006d4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80006d6:	bf00      	nop
+ 80006d8:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80006da:	bc08      	pop	{r3}
+ 80006dc:	469e      	mov	lr, r3
+ 80006de:	4770      	bx	lr

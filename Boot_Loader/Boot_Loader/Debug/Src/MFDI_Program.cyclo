@@ -1,0 +1,3 @@
+../Src/MFDI_Program.c:30:6:MFDI_voidSectorErase	4
+../Src/MFDI_Program.c:63:6:MFDI_voidEraseAppArea	2
+../Src/MFDI_Program.c:72:6:MFDI_voidFlashWrite	5

@@ -1,0 +1,7 @@
+../Src/MNVIC_Program.c:39:6:MNVIC_voidEnableInterrupt	16	static
+../Src/MNVIC_Program.c:45:6:MNVIC_voidDisableInterrupt	16	static
+../Src/MNVIC_Program.c:51:6:MNVIC_voidEnableInterruptPending	16	static
+../Src/MNVIC_Program.c:57:6:MNVIC_voidDisableInterruptPending	16	static
+../Src/MNVIC_Program.c:63:4:MNVIC_u8IsInterruptActive	16	static
+../Src/MNVIC_Program.c:67:6:MNVIC_voidSetInterruptPriority	24	static
+../Src/MNVIC_Program.c:84:6:MNVIC_voidSetInterruptGroupMode	16	static
